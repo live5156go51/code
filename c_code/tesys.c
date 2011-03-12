@@ -111,6 +111,36 @@ int Cal_Age(void)		/* Caculate your age */
     }  
 }
 
+void Maopao(void)		/* Maopao function */
+{
+  int array[]={10,9,8,7,6,5,4,3,2,1};
+  int i,j,k,l,temp;
+  
+  for (i = 0; i < 10; ++i)
+    {
+      printf ("%d ",array[i]);
+    }
+  printf ("\n-------------------------\n\n");
+  for (j = 0; j < 10; ++j)
+    {
+      for (k = 0; k < 10; ++k)
+	{
+	  if (array[k] > array[k+1])
+	    {
+	      temp = array[k+1];
+	      array[k+1] = array[k];
+	      array[k] = temp;
+	    }
+	}
+    }
+  for (l = 0; l < 10; ++l)
+    {
+      printf ("%d ",array[l]);      
+    }
+  printf ("\n");
+}
+
+
 int main(int argc, char *argv[])
 {
   int select;
@@ -145,6 +175,7 @@ int main(int argc, char *argv[])
 	case 1 : SYSTEM_CLEAR;DataTypeLength();break;
 	case 2 : SYSTEM_CLEAR;Sys_Endian();break;
 	case 3 : SYSTEM_CLEAR;Cal_Age();break;
+	case 4 : SYSTEM_CLEAR;Maopao();break;
 	default : ; break;
 	}
     }
