@@ -1,0 +1,101 @@
+\documentclass[11pt,a4paper,xetex]{moderncv}
+% moderncv themes
+\moderncvtheme[blue]{casual}                % idem
+%\moderncvtheme[blue]{classic}                % idem
+% character encoding
+\usepackage{fontspec,xunicode, xltxtra}
+\defaultfontfeatures{Scale=MatchLowercase}
+\setmainfont[Numbers=OldStyle,Mapping=tex-text]{AR PL UMing CN}
+\setsansfont[Mapping=tex-text]{AR PL UMing CN}
+\setmonofont{WenQuanYi Zen Hei Mono}
+%\setmainfont[Mapping=tex-text]{文泉驿正黑}
+%\setsansfont[Mapping=tex-text]{AR PL UKai CN}
+\XeTeXlinebreaklocale "zh"
+\widowpenalty=10000
+% adjust the page margins
+\usepackage[scale=0.85]{geometry}
+\AtBeginDocument{\recomputelengths}
+% personal data
+\firstname{李俊鹏}
+\familyname{}
+%\brief{\small{学无止境！}}
+\title{个人简历}
+\address{柳州铁道职业技术学院}{545007}
+\mobile{13978080642}
+%\phone{13978080642}
+\email{junstrix@gmail.com}
+p%\extrainfo{中青团员}
+\photo[64pt]{face}
+\quote{柳州铁道职业技术学院  通信技术专业}
+\nopagenumbers{}
+%----------------------------------------------------------------------------------
+%            content
+%----------------------------------------------------------------------------------
+\begin{document}
+\maketitle
+%\section {教育背景}
+% \cvcomputer {学校：}{春哥大学}{学历：}{本科}
+% \cvcomputer {专业：}{歌唱系}{成绩：}{Top20\%}
+\section{基本信息}
+\cvcomputer{姓名:}{李俊鹏}{性别:}{男}
+\cvcomputer{民族:}{汉族}{籍贯:}{广西玉林}
+\cvcomputer{出生日期:}{1990-07-23}{政治面貌:}{共青团员}
+\section{受教育经历}
+\cventry{2006-2009}{\textit{高中}}{博白县第三高级中学}{广西博白县}{}{}
+\cventry{2009-\qquad}{\textit{大专}}{柳州铁道职业技术学院}{广西柳州市}{}{}
+%\section{个人能力}
+%\section {主要参与的项目}
+% \cvproject{推广信仰春哥}{春哥、永生}
+% \cvline{介绍}{为了广大信徒能够获得永生}
+% \cvline{时间}{2009年于英特网市}
+% \cvline{职责}{\emph{施法复活信徒}
+%   提出了“信春哥、得永生”的口号，并亲自原地满状态复活了若干信徒，获得了社会的好评。批评了“两个爷们、一哥一弟”的说法，收复了曾哥作为护法。
+% }
+% \cvproject{快乐女声}{歌唱、作秀}
+% \cvline{介绍}{一个湖南卫视的娱乐节目}
+% \cvline{时间}{2009年暑期于湖南卫视}
+% \cvline{职责}{\emph{入围三甲的选手！}
+%   唱遍全场无敌手。
+% }
+% \section{经历}
+% \cvline{}{计算机技术与软件专业技术资格（水平）考试 软件设计师}
+% \cvline{}{国家英语等级考试六级~510分}
+% \cvline{2009年暑期}{于春哥城联系采菊大法。}
+% \cvline{2008年暑期}{于春格城参与项目《关于验证“信春哥、得永生”的成功性》}
+% \section{自我评价}
+% \cvline{\Neutral~}{具有优秀的采菊能力，曾采遍菊花2009朵。}
+% \cvline{\Neutral~}{良好的团队协作能力，帮助队友原地满血复活。}
+% \end{document}
+\section{个人能力}
+\cvline{\kai{学习能力}}{在校学习期间考试成绩优秀，多次获得奖学金和参加各种技能比赛,有较强的自学能力；}
+\cvline{\kai{理论水平}}{在计算机领域、操作系统应用、计算机网络技术、自由软件,单片机及电子自动化,在通信领域，路由交换技术,通信线路，Voip，三网融合等相关领域，有一定的理论基础；}
+\cvline{\kai{专业技能}}{ 掌握C语言，VHDL等程序设计语言，能熟练使用OFFICE办公软件,能熟练操作linux操作系统；}
+\cvline{\kai{工作能力}}{工作尽职尽责、服从领导，能够认真、按时完成任务，具有良好的团队合作精神；}
+\section{\fs{获奖经历}}
+\cvlistdoubleitem[\Neutral]{“个人嘉奖”}{“优秀班干部”；}
+\cvlistdoubleitem[\Neutral]{校越野赛前五十名}{}
+\section{\fs{工作经历}}
+%\subsection{全职工作}
+\cventry{2004--2006}{资料员}{中建七局一公司郑州分公司}{河南省新乡市}{}{}%{Description line 1\newline{}Description line 2}% arguments 3 to 6 are optional
+\section{\fs{爱好}}
+\cvlistdoubleitem[\Neutral]{篮球}{乒乓球}
+\cvlistdoubleitem[\Neutral]{音乐}{Geek文化}
+\section{\fs{自我评价}}
+\cvline{\kai{性格}}{开朗、活泼、乐观}
+\cvline{\kai{学习}}{勤奋严谨，有钻研精神，动手能力强，有很强的自学能力，热衷于开源文化}
+\cvline{\kai{生活}}{勤俭节约，吃苦耐劳，热爱集体，乐于助人，积极参加各类公共活动，有良好的人际关系}
+\cvline{\kai{工作}}{做事细心，认真负责，能够高效率的完成工作，易于沟通，具有良好的创新意识和团队意识，热爱自己从事的工作，敢挑重担}
+% Publications from a BibTeX file
+%\newcommand{\refname}{发表论文}
+%\nocite{*}
+%\bibliographystyle{unsrt}
+%\bibliography{hht}       % 'publications' is the name of a BibTeX file
+%\begin {thebibliography}{99}
+%  \bibitem {1} Hongtao Huang, Shaobin Huang, Tao Zhang. A Formal Method for Verifying Production Knowledge Base[A]. Internet Computing for Science and Engineering (ICICSE), 2009 Fourth International Conference on[C]. 2009: 19-23.
+%  \bibitem {2} Tao Zhang, Shaobin Huang, Hongtao Huang. An Operational Semantics for UML RT-Statechart in Model Checking Context[A]. Internet Computing for Science and Engineering (ICICSE), 2009 Fourth International Conference on[C]. 2009: 12-18.
+%  \bibitem {3} Mingyu Ji, Shaobin Huang, Hongtao Huang, et al. The New Development of PRISM for Probabilistic Model Checking[A]. Internet Computing for Science and Engineering (ICICSE), 2009 Fourth International Conference on[C]. 2009: 64-66.
+%  \bibitem {4} 黄宏涛, 黄少滨, 张涛. 基于不动点计算的产生式知识库形式化建模方法[J]. 哈尔滨工程大学学报, .
+% \end{thebibliography}
+\end{document}
+%% end of file `resume.tex'.
+
