@@ -1,0 +1,8 @@
+*.out
+*.aux
+*.log
+*.swp
+*.pdf
+*.dir
+*.scale
+Tex/moderncv/auto/
