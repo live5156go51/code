@@ -1,0 +1,76 @@
+% 高层中文解决方案的 TeX 源码
+%中文字体复制到/usr/share/fonts/win-ttf
+%命令：fc-cache -fsv
+%需要root权限才能正常编译
+\documentclass[UTF8,adobefonts]{ctexart}
+\usepackage{fontspec}
+\usepackage{xunicode}
+\usepackage{xltxtra}
+\title{Texlive 又一中文解决方案}
+\author{Junstrix}
+\date{\today}
+
+\begin{document}
+  \maketitle{}
+
+
+%  \begin {flushleft}
+%     1. 安装 LaTeX
+
+% 推荐从 iso 镜像安装（而非用系统的包管理工具从源里安装） TeX Live 2009 ，具体请参考我的这篇 wiki 文章。
+
+% 2. 安装必需的字体
+
+% 推荐使用 Adobe 的四款中文字体（宋体、黑体、仿宋、楷体）加 Windows 下的两款字体（隶书、幼圆）。我把它们收集好并打包了，您可以从这儿下载。解压之后，把字体文件扔到 ~/.fonts 或者/usr/share/fonts 下面就行了。
+
+% 执行 \$ fc-list | grep -i adobe 来确认安装成功。
+
+% 3. 修改配置文件
+
+% 为了让后面的高层方案支持隶书和幼圆字体，修改 ctex 宏包里的这个配置文件 /usr/local/texlive/2009/texmf-dist/tex/latex/ctex/fontset/ctex-xecjk-adobefonts.def ，在 “\backslash setCJKfamilyfont\{zhkai\}\{Adobe Kaiti Std\}”  \\
+%  这一行后面添加以下内容：
+
+% \backslash setCJKfamilyfont\{zhli\}\{LiSu\} \\
+% \backslash setCJKfamilyfont\{zhyou\}\{YouYuan\}
+% 4. 开始写文档吧~
+
+% “基于 XeTeX 的方案”中，又可以分为高层和低层两种方案。如果您想写中文文档，那么用高层方案会比较合适；如果您只是想在英文文档中穿插中文，那么低层方案更加合适。
+
+% 对这两种方案，我分别写了简单的模板，用来演示中文的基本用法（如改变字体和字号）。注意，必须用 xelatex 这个命令编译。
+%   \end{flushleft}
+
+\begin{center}
+  1. 字体示例：\\
+  \begin{tabular}{c|c}
+    \hline
+    \textbf{\TeX 命令} & \textbf{效果}\\
+    \hline
+    \verb|{\songti 宋体}| & {\songti 宋体}\\
+    \hline
+    \verb|{\heiti 黑体}| & {\heiti 黑体}\\
+    \hline
+    \verb|{\fangsong 仿宋}| & {\fangsong 仿宋}\\
+    \hline
+    \verb|{\kaishu 楷书}| & {\kaishu 楷书}\\
+    \hline
+    \verb|{\lishu 隶书}| & {\lishu 隶书}\\
+    \hline
+    \verb|{\youyuan 幼圆}| & {\youyuan 幼圆}\\
+    \hline
+  \end{tabular}
+\end{center}
+ 
+\begin{center}
+  2. 字号示例：\\
+  {\zihao{0}初号}
+  {\zihao{1}一号}
+  {\zihao{2}二号}
+  {\zihao{3}三号}
+  {\zihao{4}四号}
+  {\zihao{5}五号}
+  {\zihao{6}六号}
+  {\zihao{7}七号}
+  {\zihao{8}八号}
+\end{center}
+
+\end{document}
