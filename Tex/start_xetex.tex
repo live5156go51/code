@@ -1,0 +1,94 @@
+\documentclass{beamer}          
+\usepackage{beamerthemesplit}   
+\usepackage{fontspec}
+\usepackage{graphics}
+\setsansfont{Adobe Kaiti Std}
+\XeTeXlinebreaklocale "zh"
+\XeTeXlinebreakskip=0pt plus 1pt minus 0.1pt
+\begin{document}
+  \title{从安装TeXlive到使用}     
+  \subtitle{开源盛世，人心所向}   
+  \author{Junstrix}           
+  \institute{Email:junstrix@gmail.com}
+  \date{\today{}}             
+  \frame{\titlepage{}}        
+  \frame{\frametitle{大致安装使用步骤}
+    \pause{}
+    \begin{itemize}
+    \item 下载
+    \item 安装
+    \item XeTex中文配置
+    \item 其它扩展字体下载与使用
+    \item 一些示例
+    \end{itemize}
+  }
+  \frame{\frametitle{下载}
+    \pause{}
+    \begin{itemize}
+      \item 官网:http://www.tug.org/texlive
+      \item 下载网络安装包:\\
+        http://mirrors.xmu.edu.cn/CTAN/systems/texlive/tlnet/
+      \item 下载光盘镜像包: \\
+        http://mirrors.xmu.edu.cn/CTAN/systems/texlive/Images/
+    \end{itemize} 
+  }
+  \frame{\frametitle{安装}
+    \pause{} 
+    \begin{itemize}
+      \item 安装方式:1.网络安装 2.本地安装      
+        选择本地安装只需要下载解压 install-tl-unx.tar.gz\\
+        执行./install-tl -gui 根据选项图形安装 \\
+        如果本地安装方式，首先下载光盘镜像文件或光盘刻录\\
+        mount挂载到本地，同样执行./install-tl -gui安装
+      \item 注意问题 \\
+        1.环境变量的设置 \\
+        2.与旧版本冲突问题
+    \end{itemize}
+  }
+  \frame{\frametitle{XeTex中文配置}
+    \pause{}
+    \begin{itemize}
+    \item 
+      默认情况下XeTeX随TeXlive发行版一同安装，只需要配置下就可以直接应用系统字体来排版中文。
+    \item 解决XeTex中文问题 \\
+      1. 将 texlive-fontconfig.conf 文件复制到 /etc/fonts/conf.d/09-texlive.conf。\\
+      2. 运行 fc-cache -fsv。\\
+    \item 相关命令 \\
+      1.fc-list 查看系统已经安装字体。fc-list :lang=zh-cn可以查看系统已安装的中文字体 \\
+      2.fc-cache 更新字体。fc-list -fsv，会扫描字体目录从而全面更新系统字体。
+    \end{itemize}
+  }
+  \frame{\frametitle{中文测试}
+    \pause{}
+    \begin{itemize}
+    \item 测试代码 \\
+      $\backslash$ documentclass\{article\} \\
+      $\backslash$ usepackage\{fontspec\} \\
+      $\backslash$ setmainfont\{AR PL UKai CN\} \\ 
+      \% AR PL UKai CN即用fc-list :lang=zh-cn命令列出来的系统中文字体 \\
+      $\backslash$ begin\{document\}\\
+        \qquad{}中文测试\\
+      $\backslash$ end\{document\}
+    \end{itemize}
+  }
+  \frame{\frametitle{其它字体下载与使用}
+    \pause{}
+    \begin{itemize}
+    \item 字体下载 \\
+      一个方法是直接复制Windows格式为ttf的字体 /Windows/Fonts \\
+      如:cp pathto/Windows/Fonts/*.ttf  /usr/share/fonts/win-ttf(自行创建) \\
+      另一个方法就是网络资源，一些私权字体比如方正字体、adobe字体
+    \item 使用 \\
+      首先fc-cache -fsv更新系统字体，然后fc-list :lang=zh-cn查看是否字体更新成功。\\
+      系统字体更新正常XeTeX即可直接调用了。
+    \end{itemize}
+  }
+  \frame{\frametitle{示例}
+    \begin{itemize}
+    \item XeTex beamer slide 
+    \item XeTex moderncv个人简历
+    \item XeTex高层中文解决方案
+    \item XeTex低层中文解决方案
+    \end{itemize}    
+  }
+\end{document}
