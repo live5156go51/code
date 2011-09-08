@@ -1,0 +1,137 @@
+% Created 2011-09-08 四 21:59
+\documentclass[bigger]{beamer}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{fixltx2e}
+\usepackage{graphicx}
+\usepackage{longtable}
+\usepackage{float}
+\usepackage{wrapfig}
+\usepackage{soul}
+\usepackage{textcomp}
+\usepackage{marvosym}
+\usepackage{wasysym}
+\usepackage{latexsym}
+\usepackage{amssymb}
+\usepackage{hyperref}
+\usepackage{fontspec}
+\usepackage{hyperref}
+%\usetheme{Berkeley}
+\setsansfont{Adobe Kaiti Std}
+\XeTeXlinebreaklocale "zh"
+\XeTeXlinebreakskip=0pt plus 1pt minus 0.1pt
+\widowpenalty=10000
+\tolerance=1000
+\tolerance=1000
+\providecommand{\alert}[1]{\textbf{#1}}
+
+\title{使用emacs编写slide in org-mode}
+\author{Junstrix}
+\date{2011-09-08 四}
+
+\begin{document}
+
+\maketitle
+
+\begin{frame}
+\frametitle{Outline}
+\setcounter{tocdepth}{3}
+\tableofcontents
+\end{frame}
+
+
+\section{安装更高的版本支持}
+\label{sec-1}
+\begin{frame}[fragile]
+\frametitle{安装　org-mode}
+\label{sec-1-1}
+
+\begin{itemize}
+\item 下载
+\item 解压安装
+     tar xvf org-xxx.tar -C \~/path/to/plugins
+     make 
+     make install
+\item 设置.emacs
+\end{itemize}
+
+\begin{verbatim}
+(setq load-path (cons "~/.emacs.d/plugins/org-7.7/lisp" load-path))
+(setq load-path (cons "~/.emacs.d/plugins/org-7.7/contrib" load-path))
+(require 'org-install)
+(add-to-list 'auto-mode-alist '("\\.org\\'" . org-mode))
+(global-set-key "\C-cl" 'org-store-link)
+(global-set-key "\C-cc" 'org-capture)
+(global-set-key "\C-ca" 'org-agenda)
+(global-set-key "\C-cb" 'org-iswitchb)
+\end{verbatim}
+\end{frame}
+\section{org-mode beamer相关配置}
+\label{sec-2}
+\begin{frame}[fragile]
+\frametitle{org-mode beamer}
+\label{sec-2-1}
+
+一个slide首先设置slide相关属性，包括标题、作者、日期、Email等
+\begin{itemize}
+\item C-c C-e t　插入并编辑标题、作者、日期等
+\item beamer环境配置
+\end{itemize}
+
+\begin{verbatim}
+#+startup: beamer
+#+LaTeX_CLASS: beamer
+#+LaTeX_CLASS_OPTIONS: [bigger]
+#+LATEX_FRAME_LEVEL: 2
+#+COLUMNS: %40ITEM %10BEAMER_env(Env) %9BEAMER_envargs(Env Args)
+%4BEAMER_col(Col) %10BEAMER_extra(Extra)
+\end{verbatim}
+\end{frame}
+\section{一个slide例子}
+\label{sec-3}
+\begin{frame}
+\frametitle{A Simple Slide Example}
+\label{sec-3-1}
+
+This slide consists of some text with a number of bullet points:
+
+\begin{itemize}
+\item the first, very @important@, point!
+\item the previous point shows the use of the special markup which
+  translates to the Beamer specific \emph{alert} command for highlighting
+  text.
+\end{itemize}
+
+
+The above list could be numbered or any other type of list and may
+include sub-lists.
+\end{frame}
+\section{如何使用xelatex编译org-mode导出的Tex源码}
+\label{sec-4}
+\begin{frame}[fragile]
+\frametitle{xelatex编译\TeX{}}
+\label{sec-4-1}
+
+因为emacs导出没有直接xelatex的支持，而XeTeX的优点就不说了，所以我们要自己修改
+emacs in org-mode 导出的\TeX{}源码，以Xelatex能正确编译
+\begin{itemize}
+\item 增加必要的宏包
+\end{itemize}
+
+\begin{verbatim}
+\usepackage{fontspec}
+\usepackage{hyperref}  %bookmark and add it!!!
+\setsansfont{Adobe Kaiti Std} %command list fonts:fc-list :lang=zh-cn
+\XeTeXlinebreaklocale "zh"
+\XeTeXlinebreakskip=0pt plus 1pt minus 0.1pt
+\widowpenalty=10000
+\end{verbatim}
+
+
+xetex导盲区设置请参照链接:\href{https://github.com/live5156go51/code/blob/master/Tex/moderncv/resume.tex}{xetex配置例子}
+\begin{itemize}
+\item 编译 xelatex file.tex
+\end{itemize}
+\end{frame}
+
+\end{document}

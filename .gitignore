@@ -5,4 +5,9 @@
 *.pdf
 *.dir
 *.scale
+*.nav
+*.snm
+*.toc
+*.tex\~
 Tex/moderncv/auto/
+Tex/auto/
