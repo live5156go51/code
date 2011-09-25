@@ -3,7 +3,7 @@
  *编译：gcc *.c -o ggetip  `pkg-config --cflags gtk+-3.0`  `pkg-config --libs gtk+-3.0`
  *author:junstrix
  *email:junstrix@gmail.com
- *date:  
+ *date: 2011-9-25  
  */
 #include <gtk/gtk.h>
 
@@ -22,26 +22,33 @@ static gboolean Txt_serch_event (GtkWidget *widget,
 	struct in_addr address;
 	const gchar *host_name;
 
-	host_name = gtk_entry_get_text(GTK_ENTRY(data));	
+	host_name = gtk_entry_get_text(GTK_ENTRY(data));
+	
 	host = gethostbyname(host_name);
 
 	if(host == NULL)
-		g_print("host %s can't find .\n",host_name);
+	{
+		g_print("host %s can't be find.\n",host_name);
+	}
 	else
 	{
 		memcpy(&address,host->h_addr,4);
-		g_print("Ip: %s\n",host_name,inet_ntoa(address));
+		g_print("Input domain is %s -- Converted ip address is: %s\n",host_name,inet_ntoa(address));
 	}
 	return TRUE;	
 }
 int main(int argc, char *argv[])
 {
-	GtkWidget *window,*grid,*txt_input,*button1,*button2;
+	GtkWidget	*window,
+			*grid,
+			*txt_input,
+			*button1,
+			*button2;
 
 	gtk_init(&argc,&argv);
 
 	window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
-	gtk_window_set_title(GTK_WINDOW(window),"Get IP"); //Set window title
+	gtk_window_set_title(GTK_WINDOW(window),"Get ip from domainname  --by junstrix"); //Set window title
 	g_signal_connect(window,"destroy",G_CALLBACK(gtk_main_quit),NULL); //event
 	gtk_container_set_border_width(GTK_CONTAINER(window),20);
 
