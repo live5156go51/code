@@ -1,0 +1,67 @@
+#! /bin/bash
+#Email:junstrix@gmail.com
+#不足之外,install 没能实现一步完成
+#安装还需三步才能完成 install hack iour
+#此版本是一个实现版本，许多地方需优化
+#没加入依赖文件测试部分
+TAR_SRC=cisco-iou.tar.gz
+ROUTER=i86bi_linux-adventerprisek9-ms
+SWITCH=i86bi_linuxl2-upk9-ms
+WRAPPER=wrapper-linux
+INSTALL_DIR=/usr/share/ciscoiou
+function usage() {
+    echo "install.sh [OPTION]"
+    echo " --install        install cisco iou at system"
+    echo " --uninstall      uninstall cisco iou from system"
+    echo " --hack           hacking iou..."
+    echo " --iour           hack iour for your home directory"
+    exit 0
+}
+function install() {
+    mkdir -p $INSTALL_DIR
+    echo "create $INSTALL_DIR ..."
+    echo "cp files to $INSTALL_DIR"
+    tar -xvf $TAR_SRC -C $INSTALL_DIR
+    echo "install sucessed!!!"
+    ln -s $INSTALL_DIR/$WRAPPER /bin/$WRAPPER
+    ln -s $INSTALL_DIR/$ROUTER /bin/$ROUTER
+    ln -s $INSTALL_DIR/$SWITCH /bin/$SWITCH
+    echo "ln -s $INSTALL_DIR/$ROUTER to /bin/$ROUTER"
+    echo "ln -s $INSTALL_DIR/$SWITCH to /bin/$SWITCH"
+    echo "ln -s $INSTALL_DIR/$WRAPPER to /bin/$WRAPPER"
+    exit 0
+}
+function uninstall() {
+    rm -rf $INSTALL_DIR
+    echo " remove cisco iou sucessed..."
+    rm -rf /bin/$WRAPPER
+    rm -rf /bin/$ROUTER
+    rm -rf /bin/$SWITCH
+    echo  "remove /bin/$WRAPPER ..."
+    exit 0
+}
+function hack() {
+    echo '127.0.0.127 xml.cisco.com' >> /etc/hosts
+    for R in $INSTALL_DIR/$ROUTER ; do bbe -b "/\xfc\xff\x83\xc4\x0c\x85\xc0\x75\x14\x8b/:10" -e  "r 7 \x90\x90" -o $R.x $R;mv $R.x $R; done;
+    for S in $INSTALL_DIR/$SWITCH ; do bbe -b "/\xa1\xff\x83\xc4\x0c\x85\xc0\x75\x17\x8b/:10" -e "r 7 \x74" -o $S.x $S;mv $S.x $S; done;
+    chmod +x $INSTALL_DIR/$ROUTER
+    chmod +x $INSTALL_DIR/$SWITCH
+}
+function iour() {
+    echo -e "[license]\n$(uname -n) = 0000000000000000" > ~/.iourc
+}
+if [ -e $1 ]; then
+    usage
+else
+    if [ $1 = "--install" ]; then
+	install
+    elif [ $1 = "--uninstall" ]; then
+	uninstall
+    elif [ $1 = "--hack" ]; then
+	hack
+    elif [ $1 = "--iour" ]; then
+     	iour
+    else
+	exit 0
+    fi
+fi

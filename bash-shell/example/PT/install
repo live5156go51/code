@@ -1,0 +1,109 @@
+#!/bin/bash
+
+# Thanks to Felix Wolf (felix@bar.bz) for providing this install script.
+initInstall ()
+{
+echo
+echo Welcome to Cisco Packet Tracer 5.2 Installation
+echo
+echo Read the following End User License Agreement \"EULA\" carefully. You must accept the terms of this EULA to install and use Cisco Packet Tracer 5.2.
+echo "Press the Enter key to read the EULA."
+echo
+read cont
+more eula.txt
+echo "Do you accept the terms of the EULA? (Y)es/(N)o"
+echo
+read input	
+case "$input" in
+yes|YES|Yes|Y|y)
+(installer);;
+esac
+exit 0
+}
+
+installer ()
+{
+echo "You have accepted the terms to the EULA. Congratulations. Packet Tracer will now be installed."
+read -p "Enter location to install Cisco Packet Tracer 5.2 or press enter for default [/opt/pt]: " IDIR
+
+if [ -z $IDIR ]; then
+	IDIR="/opt/pt"
+fi
+
+if [ -e $IDIR ]; then
+	echo
+	echo Directory $IDIR already exists
+	echo Exiting installation
+	exit
+fi
+
+SDIR=`dirname $_`
+QIDIR=${IDIR//\//\\\\\/}
+
+echo Installing into $IDIR
+
+if mkdir $IDIR > /dev/null 2>&1; then
+	if cp -r $SDIR/* $IDIR; then
+		echo Copied all files successfully to $IDIR
+	fi
+	
+	sh -c "sed s/III/$QIDIR/ $SDIR/tpl.packettracer > $IDIR/packettracer"
+	chmod a+x $IDIR/packettracer
+	sh -c "sed s/III/$QIDIR/ $SDIR/tpl.linguist > $IDIR/linguist"
+	chmod a+x $IDIR/linguist
+else 
+	echo
+	echo Not able to create and copy files to $IDIR
+	read -p "Should we try to gain root access with sudo? [Yn] " QSD
+	if [ "$QSD" = "y" ] || [ "$QSD" = "Y" ] || [ -z $QSD ]; then
+		if sudo mkdir $IDIR; then
+			echo Installing into $IDIR
+			if sudo cp -r $SDIR/* $IDIR; then
+				echo Copied all files successfully to $IDIR
+			else
+				echo
+				echo Not able to copy files to $IDIR
+				echo Exiting installation
+				exit
+			fi
+			sudo sh -c "sed s/III/$QIDIR/ $SDIR/tpl.packettracer > $IDIR/packettracer"
+			sudo chmod a+x $IDIR/packettracer
+			sudo sh -c "sed s/III/$QIDIR/ $SDIR/tpl.linguist > $IDIR/linguist"
+			sudo chmod a+x $IDIR/linguist
+		else
+			echo
+			echo Not able to gain root access with sudo
+			echo Exiting installation
+			exit
+		fi
+	else
+		echo
+		echo Exiting installation
+		exit
+	fi
+fi
+
+
+
+echo
+echo 
+read -p "Should we create a symbolic link \"packettracer\" in /usr/local/bin for easy Cisco Packet Tracer 5.2 startup? [Yn] " QC
+if [ "$QC" = "y" ] || [ "$QC" = "Y" ] || [ -z $QC ]; then
+	if [ "$user" != "root" ]; then
+		sudo ln -sf $IDIR/packettracer /usr/local/bin
+	else 
+		ln -sf $IDIR/packettracer /usr/local/bin
+	fi
+	echo "Type \"packettracer\" in a terminal to start Cisco Packet Tracer 5.2"
+else
+	echo "Type \"$IDIR/packettracer\" in a terminal to start Cisco Packet Tracer 5.2"
+fi
+
+# add the environment var PT5HOME
+sh set_ptenv.sh $IDIR
+
+echo
+echo Cisco Packet Tracer 5.2 installed successfully
+}
+initInstall
+exit 0
