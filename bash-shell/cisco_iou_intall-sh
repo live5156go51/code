@@ -9,6 +9,7 @@ ROUTER=i86bi_linux-adventerprisek9-ms
 SWITCH=i86bi_linuxl2-upk9-ms
 WRAPPER=wrapper-linux
 INSTALL_DIR=/usr/share/ciscoiou
+INSTALL_UID=0
 function usage() {
     echo "install.sh [OPTION]"
     echo " --install        install cisco iou at system"
@@ -17,7 +18,15 @@ function usage() {
     echo " --iour           hack iour for your home directory"
     exit 0
 }
-function install() {
+function root_privedge() {
+    if [ "$UID" -ne "$INSTALL_UID" ]; then
+	echo "You must be root $FLAG_PAR it"
+	echo "running: sudo $0  $FLAG_PAR"
+	exit
+    fi
+}
+function install() {    
+    root_privedge
     mkdir -p $INSTALL_DIR
     echo "create $INSTALL_DIR ..."
     echo "cp files to $INSTALL_DIR"
@@ -32,6 +41,7 @@ function install() {
     exit 0
 }
 function uninstall() {
+    root_privedge
     rm -rf $INSTALL_DIR
     echo " remove cisco iou sucessed..."
     rm -rf /bin/$WRAPPER
@@ -41,15 +51,29 @@ function uninstall() {
     exit 0
 }
 function hack() {
+    root_privedge
     echo '127.0.0.127 xml.cisco.com' >> /etc/hosts
-    for R in $INSTALL_DIR/$ROUTER ; do bbe -b "/\xfc\xff\x83\xc4\x0c\x85\xc0\x75\x14\x8b/:10" -e  "r 7 \x90\x90" -o $R.x $R;mv $R.x $R; done;
-    for S in $INSTALL_DIR/$SWITCH ; do bbe -b "/\xa1\xff\x83\xc4\x0c\x85\xc0\x75\x17\x8b/:10" -e "r 7 \x74" -o $S.x $S;mv $S.x $S; done;
+    for R in $INSTALL_DIR/$ROUTER; do
+	bbe -b "/\xfc\xff\x83\xc4\x0c\x85\xc0\x75\x14\x8b/:10" -e  "r 7 \x90\x90" -o $R.x $R;mv $R.x $R
+    done
+    for S in $INSTALL_DIR/$SWITCH; do
+	bbe -b "/\xa1\xff\x83\xc4\x0c\x85\xc0\x75\x17\x8b/:10" -e "r 7 \x74" -o $S.x $S;mv $S.x $S
+    done
     chmod +x $INSTALL_DIR/$ROUTER
     chmod +x $INSTALL_DIR/$SWITCH
 }
 function iour() {
-    echo -e "[license]\n$(uname -n) = 0000000000000000" > ~/.iourc
+    if [ "$UID" != 0 ]; then
+	echo -e "[license]\n$(uname -n) = 0000000000000000" > ~/.iourc
+    else
+	echo -e "[license]\n$(uname -n) = 0000000000000000" > ~/.iourc
+	echo "you are root ... now exit to touch ~/.iourc at home directory"
+	echo "just run ./install --iour without root"
+	exit
+    fi
+
 }
+FLAG_PAR=$1
 if [ -e $1 ]; then
     usage
 else
