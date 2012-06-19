@@ -1,0 +1,88 @@
+%% start of file `template-zh.tex'.
+%% Copyright 2006-2012 Xavier Danaux (xdanaux@gmail.com).
+%
+% This work may be distributed and/or modified under the
+% conditions of the LaTeX Project Public License version 1.3c,
+% available at http://www.latex-project.org/lppl/.
+
+
+\documentclass[11pt,a4paper,sans,xetex]{moderncv}   % possible options include font size ('10pt', '11pt' and '12pt'), paper size ('a4paper', 'letterpaper', 'a5paper', 'legalpaper', 'executivepaper' and 'landscape') and font family ('sans' and 'roman')
+
+% moderncv 主题
+\moderncvstyle{classic}                        % 选项参数是 ‘casual’, ‘classic’, ‘oldstyle’ 和 ’banking’
+\moderncvcolor{blue}                          % 选项参数是 ‘blue’ (默认)、‘orange’、‘green’、‘red’、‘purple’ 和 ‘grey’
+%\nopagenumbers{}                             % 消除注释以取消自动页码生成功能
+
+% 字符编码
+\usepackage{fontspec,xunicode,xltxtra}
+\defaultfontfeatures{Scale=MatchLowercase} % 这个参数保证 serif、sans-serif 和 monospace 字体在小写时大小匹配
+%\setmainfont[Mapping=tex-text]{AR PL UKai CN}
+\setsansfont[Numbers=OldStyle,Mapping=tex-text]{AR PL UKai CN}% 使用宋体，把数字设置为等宽，比较好看
+%\setmonofont{AR PL UMing CN}
+
+\XeTeXlinebreaklocale "zh"
+\XeTeXlinebreakskip=0pt plus 1pt minus 0.1pt
+\widowpenalty=10000
+
+% 调整页边距
+\usepackage[scale=0.85]{geometry}
+%\setlength{\hintscolumnwidth}{3cm}           % 如果你希望改变日期栏的宽度
+
+% 个人信息
+\firstname{李俊鹏}
+\familyname{}
+\title{个人简历}                      % 可选项、如不需要可删除本行
+\address{柳州铁道职业技术学院}{545007}             % 可选项、如不需要可删除本行
+\mobile{13978080642}                         % 可选项、如不需要可删除本行
+%\phone{+2~(345)~678~901}                          % 可选项、如不需要可删除本行
+%\fax{+3~(456)~789~012}                            % 可选项、如不需要可删除本行
+\email{junstrix@gmail.com}                    % 可选项、如不需要可删除本行
+\homepage{junstrix.sinaapp.com}                  % 可选项、如不需要可删除本行
+%\extrainfo{附加信息 (可选项)}                  % 可选项、如不需要可删除本行
+%\photo[64pt][0.4pt]{picture}                  % ‘64pt’是图片必须压缩至的高度、‘0.4pt‘是图片边框的宽度 (如不需要可调节至0pt)、’picture‘ 是图片文件的名字;可选项、如不需要可删除本行
+%\quote{引言(可选项)}                           % 可选项、如不需要可删除本行
+
+% 显示索引号;仅用于在简历中使用了引言
+%\makeatletter
+%\renewcommand*{\bibliographyitemlabel}{\@biblabel{\arabic{enumiv}}}
+%\makeatother
+
+
+% 分类索引
+%\usepackage{multibib}
+%\newcites{book,misc}{{Books},{Others}}
+%----------------------------------------------------------------------------------
+%            内容
+%----------------------------------------------------------------------------------
+\begin{document}
+\maketitle
+
+\section{基本信息}
+\cvcomputer{姓名:}{李俊鹏}{性别:}{男}
+\cvcomputer{民族:}{汉族}{籍贯:}{广西玉林}
+\cvcomputer{学历:}{大专}{专业:}{通信技术}
+\cvcomputer{出生日期:}{1990-07-23}{政治面貌:}{共青团员}
+\section{受教育经历}
+\cvline{2006--2009}{\textit{高中},博白县第三高级中学,广西博白县}
+\cvline{2009--\qquad}{\textit{大专},柳州铁道职业技术学院,广西柳州市}
+\section{个人能力}
+\cvline{学习能力}{在校学习期间考试成绩优秀，多次获得奖学金和参加各种技能比赛,有较强的自学能力；}
+\cvline{理论水平}{在计算机领域、操作系统应用、计算机网络技术、自由软件,单片机及电子自动化,在通信领域，路由交换技术,通信线路，Voip，三网融合等相关领域，有一定的理论基础；}
+\cvline{专业技能}{ 掌握C语言，VHDL等程序设计语言，能熟练使用Windows产品,能熟练操作Linux操作系统；}
+\cvline{工作能力}{工作尽职尽责、服从领导，能够认真、按时完成任务，具有良好的团队合作精神；}
+\section{获奖经历}
+\cvlistitem{全国职业技能竞赛“华为杯”三网融合与网络优化二等奖}
+\cvlistitem{第四届“高教社杯”广西大学生电子设计大专科组赛二等奖}
+\cvlistitem{柳州市网络操作比赛第二名}
+\cvlistitem{学院大学生电子设计竞赛一等奖}
+\cvlistitem{学院网络操作比赛三等奖}
+\section{爱好}
+\cvlistdoubleitem{篮球}{乒乓球}
+\cvlistdoubleitem{音乐}{开源文化}
+\section{自我评价}
+\cvline{性格}{开朗、活泼、乐观}
+\cvline{学习}{勤奋严谨，有钻研精神，动手能力强，有很强的自学能力，热衷于开源文化}
+\cvline{生活}{勤俭节约，吃苦耐劳，热爱集体，乐于助人，积极参加各类公共活动，有良好的人际关系}
+\cvline{工作}{做事细心，认真负责，能够高效率的完成工作，易于沟通，具有良好的创新意识和团队意识，热爱自己从事的工作，敢挑重担}
+\end{document}
+%% 文件结尾 `template-zh.tex'.
